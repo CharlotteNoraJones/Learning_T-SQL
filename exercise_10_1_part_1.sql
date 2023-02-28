@@ -18,3 +18,12 @@ GROUP BY C.CustomerID;
 
 SELECT TOP (10) CustomerID, TotalOrders, TotalDue
 FROM dbo.tempCustomerSales;
+
+INSERT INTO dbo.demoProduct (ProductID, [Name], Color, StandardCost, ListPrice, [Size], [Weight])
+SELECT ProductID, [Name], Color, StandardCost, ListPrice, [Size], [Weight]
+FROM Production.Product AS P
+WHERE NOT EXISTS (
+    SELECT ProductID
+    FROM dbo.demoProduct AS DP
+    WHERE DP.ProductID = P.ProductID
+);
