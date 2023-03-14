@@ -14,7 +14,7 @@ END;
 GO
 
 IF MONTH(GETDATE()) IN (10, 11) BEGIN
-    PRINT CONCAT("The month is ", DATENAME(month, GETDATE()));
+    PRINT CONCAT('The month is ', DATENAME(month, GETDATE()));
     IF YEAR(GETDATE()) % 2 = 0 BEGIN
         PRINT 'The year is even.';
     END
@@ -22,4 +22,27 @@ IF MONTH(GETDATE()) IN (10, 11) BEGIN
         PRINT 'The year is odd.';
     END;
 END;
+GO
+
+IF EXISTS (SELECT * FROM Sales.SalesOrderHeader WHERE SalesOrderID = 1) BEGIN
+    PRINT 'There is SalesOrderID = 1';
+END
+ELSE BEGIN
+    PRINT 'There is not SalesOrderID = 1';
+END;
+GO
+
+USE WideWorldImporters;
+GO
+
+DECLARE @Count INT;
+SELECT @Count = COUNT(*)
+FROM Purchasing.PurchaseOrders;
+
+IF @Count <= 8000 BEGIN
+    PRINT '<= 8000 rows';
+END
+ELSE BEGIN
+    PRINT '> 8000 rows';
+END
 GO
