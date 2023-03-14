@@ -1,0 +1,22 @@
+USE AdventureWorks2019;
+GO
+
+DECLARE @LETTER INT = 65;
+
+WHILE @LETTER < (65 + 26) BEGIN
+    PRINT CHAR(@LETTER);
+    SET @LETTER += 1;
+END;
+GO
+
+DECLARE @COUNT INT = 0;
+WHILE @COUNT < 100 BEGIN
+    SET @COUNT += 1;
+    IF @COUNT % 2 = 0 BEGIN
+        PRINT 'Even';
+    END
+    ELSE BEGIN
+        PRINT 'Odd';
+    END;
+END;
+GO
