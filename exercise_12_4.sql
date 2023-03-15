@@ -31,3 +31,25 @@ GROUP BY C.CustomerID, P.FirstName, P.LastName;
 SELECT CustomerID, FirstName, LastName, CountOfSales, SumOfTotalDue
 FROM @CustomerInfoVar;
 GO
+
+SET NOCOUNT ON;
+DECLARE @RanNums TABLE (ID INT NOT NULL IDENTITY, RandomNum INT);
+
+DECLARE @i INT = 0;
+
+WHILE @i < 1000 BEGIN
+    INSERT INTO @RanNums
+    VALUES(CAST(RAND() * 10000 AS INT) + 1);
+    SET @i += 1;
+END;
+
+SET @i = 1;
+DECLARE @value INT;
+WHILE @i <= 1000 BEGIN
+    SELECT @value = RandomNum
+    FROM @RanNums
+    WHERE ID = @i; 
+    SET @i += 1;
+    PRINT @value;
+END;
+GO
